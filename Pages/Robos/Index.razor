@@ -1,0 +1,77 @@
+﻿@page "/indice-robos"
+@inject HttpClient Http
+@*@inject IJSRuntime JS*@
+
+<h3>ROBOS</h3>
+
+<p>
+    <a class="btn btn-primary" href="registrar-robo"> Registrar Robo</a>
+</p>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Cedula</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Sustraccion</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Lugar</th>
+            <th scope="col">Latitud</th>
+            <th scope="col">Longitud</th>
+            <th scope="col">Accion</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (robos == null)
+        {
+            @:Loading...
+        }
+        else if (robos.Count == 0)
+        {
+            @:No hay registros...
+        }
+        else
+        {
+            @foreach (var robo in robos)
+            {
+                <tr>
+                    <td>@robo.Cedula</td>
+                    <td>@robo.Nombre</td>
+                    <td>@robo.Fecha</td>
+                    <td>@robo.Sustraccion</td>
+                    <td>@robo.Valor</td>
+                    <td>@robo.Lugar</td>
+                    <td>@robo.Latitud</td>
+                    <td>@robo.Longitud</td>
+                    <td>@robo.Longitud</td>
+                    <td>
+                        <a href="editar-robo/@robo.Id" class="btn btn-success">Editar</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    List<Robo> robos { get; set; }
+    bool isLoanding = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await cargarDatos();
+    }
+    async Task cargarDatos(/*int pagina=1, int regs=10*/)
+    {
+        isLoanding = true;
+        robos = await Http.GetFromJsonAsync<List<Robo>>("api/robos");
+        robos = new List<Robo>()
+{
+           new Robo(){ Id=1, Cedula="855558845", Nombre="Aleajndar",
+           Fecha= DateTime.Now, Sustraccion="Algo", Valor=1254,
+           Lugar="Santo Domingo", Latitud=0258, Longitud=5998}
+        };
+        isLoanding = false;
+    }
+}

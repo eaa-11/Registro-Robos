@@ -22,5 +22,6 @@ namespace Prueba
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+        //.AddJsonFile("appsettings.json", optional:false, reloadOnChange:true)
     }
 }
