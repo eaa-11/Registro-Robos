@@ -43,7 +43,7 @@ namespace Prueba.Controllers
 
         // PUT: api/Robos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> PutRobo(Robo robo)
         {
             _context.Entry(robo).State = EntityState.Modified;

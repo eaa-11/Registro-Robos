@@ -1,24 +1,30 @@
 ﻿@page "/indice-robos"
 @inject HttpClient Http
-@*@inject IJSRuntime JS*@
 
-<h3>ROBOS</h3>
 
-<p>
+
+
+
+<h3>REGISTROS DE ROBOS</h3>
+
+<hr />
+
+<div class="Acciones d-grid gap-2">
     <a class="btn btn-primary" href="registrar-robo"> Registrar Robo</a>
-</p>
+    <button class="btn btn-primary" @*@onclick="@ExportToPdf*@">Exportar</button>
+</div>
 
 <table class="table table-striped">
-    <thead class="thead-dark">
+    <thead class="table-primary">
         <tr>
             <th scope="col">Cedula</th>
             <th scope="col">Nombre</th>
             <th scope="col">Fecha</th>
-            <th scope="col">Sustraccion</th>
-            <th scope="col">Valor</th>
             <th scope="col">Lugar</th>
             <th scope="col">Latitud</th>
             <th scope="col">Longitud</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Sustraccion</th>
             <th scope="col">Accion</th>
         </tr>
     </thead>
@@ -39,12 +45,11 @@
                     <td>@robo.Cedula</td>
                     <td>@robo.Nombre</td>
                     <td>@robo.Fecha</td>
-                    <td>@robo.Sustraccion</td>
-                    <td>@robo.Valor</td>
                     <td>@robo.Lugar</td>
                     <td>@robo.Latitud</td>
                     <td>@robo.Longitud</td>
-                    <td>@robo.Longitud</td>
+                    <td>@robo.Valor</td>
+                    <td>@robo.Sustraccion</td>
                     <td>
                         <a href="editar-robo/@robo.Id" class="btn btn-success">Editar</a>
                     </td>
@@ -56,7 +61,7 @@
 
 @code {
     List<Robo> robos { get; set; }
-    bool isLoanding = false;
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -64,14 +69,6 @@
     }
     async Task cargarDatos(/*int pagina=1, int regs=10*/)
     {
-        isLoanding = true;
         robos = await Http.GetFromJsonAsync<List<Robo>>("api/robos");
-        robos = new List<Robo>()
-{
-           new Robo(){ Id=1, Cedula="855558845", Nombre="Aleajndar",
-           Fecha= DateTime.Now, Sustraccion="Algo", Valor=1254,
-           Lugar="Santo Domingo", Latitud=0258, Longitud=5998}
-        };
-        isLoanding = false;
     }
 }

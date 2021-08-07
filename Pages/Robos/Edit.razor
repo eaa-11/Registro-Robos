@@ -1,0 +1,39 @@
+﻿@page "/editar-robo/{Id:int}"
+@inject HttpClient Http
+@inject NavigationManager Navigator
+
+<h3>EDITAR REGISTRO DE ROBO</h3>
+<hr />
+
+@if (!string.IsNullOrEmpty(error))
+{
+    <text>@error</text>
+}
+<RoboForm TextoBoton="Modificar" OnValidSubmit="@EditarRegistro" robo="@robo" />
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    Robo robo = new Robo();
+    string error = string.Empty;
+
+
+    protected async override Task OnParametersSetAsync()
+    {
+        robo = await Http.GetFromJsonAsync<Robo>($"api/robos/{Id}");
+    }
+    async Task EditarRegistro()
+    {
+        try
+        {
+            await Http.PutAsJsonAsync("api/robos", robo);
+            Navigator.NavigateTo("indice-robos");
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message);
+            error = ex.Message;
+        }
+    }
+}

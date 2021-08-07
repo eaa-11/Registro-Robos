@@ -1,0 +1,66 @@
+﻿<EditForm Model="@robo" OnValidSubmit="@OnValidSubmit">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-lg-6">
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label class="col-form-label" for="cedula">Cedula</label>
+                        <InputText id="cedula" class="form-control" @bind-Value="robo.Cedula" />
+                        <ValidationMessage For="@(()=> robo.Cedula)" />
+                    </div>
+                    <div class="form-group col-12">
+                        <label class="col-form-label" for="cedula">Nombre</label>
+                        <InputText id="nombre" class="form-control" @bind-Value="robo.Nombre" />
+                        <ValidationMessage For="@(()=> robo.Nombre)" />
+                    </div>
+                    <div class="form-group col-sm-12 col-lg-6">
+                        <label class="col-form-label" for="date">Fecha</label>
+                        <InputDate id="date" class="form-control" @bind-Value="@robo.Fecha" />
+                        <ValidationMessage For="@(()=> robo.Fecha)" />
+                    </div>
+                    <div class="form-group col-12">
+                        <label class="col-form-label" for="lugar">Lugar</label>
+                        <InputText id="lugar" class="form-control" @bind-Value="robo.Lugar" />
+                        <ValidationMessage For="@(()=> robo.Lugar)" />
+                    </div>
+                    <div class="form-group col-sm-12 col-lg-6">
+                        <label class="col-form-label" for="latitud">Latitud</label>
+                        <InputNumber id="latitud" @bind-Value="@robo.Latitud" class="form-control" />
+                        <ValidationMessage For="@(()=> robo.Latitud)" />
+                    </div>
+                    <div class="form-group col-sm-12 col-lg-6">
+                        <label class="col-form-label" for="longitud">Longitud</label>
+                        <InputNumber id="longitud" @bind-Value="@robo.Longitud" class="form-control" />
+                        <ValidationMessage For="@(()=> robo.Longitud)" />
+                    </div>
+                    <div class="form-group col-12">
+                        <label class="col-form-label" for="valor">Valor</label>
+                        <InputNumber id="valor" @bind-Value="@robo.Valor" class="form-control" />
+                        <ValidationMessage For="@(()=> robo.Valor)" />
+                    </div>
+                    <div class="form-group col-12">
+                        <label class="col-form-label" for="sustraccion">Sustraccion</label>
+                        <InputTextArea id="sustraccion" @bind-Value="@robo.Sustraccion" class="form-control" />
+                        <ValidationMessage For="@(()=> robo.Sustraccion)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">@TextoBoton</button>
+        <a href="indice-robos" class="btn btn-primary">Volver</a>
+    </div>
+    <DataAnnotationsValidator />
+</EditForm>
+
+
+@code {
+
+    [Parameter]
+    public Robo robo { get; set; } = new Robo();
+    [Parameter]
+    public string TextoBoton { get; set; } = "Guardar";
+    [Parameter]
+    public EventCallback OnValidSubmit { get; set; }
+}

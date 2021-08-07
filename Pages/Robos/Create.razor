@@ -1,8 +1,20 @@
-﻿@page "/"
+﻿@page "/registrar-robo"
+@inject HttpClient Http
+@inject NavigationManager Navigator
 
+<h3>REGISTRAR ROBO</h3>
 
-<h3>Create</h3>
+<hr />
+
+<RoboForm TextoBoton="Registrar" OnValidSubmit="@CrearRegistro" robo="@robo"/>
 
 @code {
 
+    Robo robo = new Robo();
+
+    async Task CrearRegistro()
+    {
+        await Http.PostAsJsonAsync("api/robos", robo);
+        Navigator.NavigateTo("indice-robos");
+    }
 }
