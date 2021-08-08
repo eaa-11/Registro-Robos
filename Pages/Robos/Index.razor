@@ -1,10 +1,6 @@
 ﻿@page "/indice-robos"
 @inject HttpClient Http
 
-
-
-
-
 <h3>REGISTROS DE ROBOS</h3>
 
 <hr />
@@ -61,7 +57,6 @@
 
 @code {
     List<Robo> robos { get; set; }
-
 
     protected override async Task OnInitializedAsync()
     {

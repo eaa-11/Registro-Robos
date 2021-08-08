@@ -43,6 +43,11 @@ namespace Prueba
             {
                 app.UseDeveloperExceptionPage();
             }
+            else if(env.IsProduction())
+            {
+                app.UseDeveloperExceptionPage();
+                //app.UseExceptionHandler("/Error");
+            }
             else
             {
                 app.UseExceptionHandler("/Error");
