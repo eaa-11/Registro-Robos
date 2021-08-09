@@ -20,9 +20,8 @@ namespace Prueba
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>()
-                    .UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
-                    ////.UseEnvironment(EnvironmentName.Development);
+                    webBuilder
+                    .UseStartup<Startup>();
                 });
     }
 }

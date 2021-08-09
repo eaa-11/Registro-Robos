@@ -34,6 +34,7 @@ namespace Prueba
             services.AddControllers();
             services.AddHttpClient();
             services.AddSingleton(new HttpClient { BaseAddress = new Uri("http://localhost:62776") });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
